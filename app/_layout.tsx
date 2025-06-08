@@ -42,7 +42,42 @@ export default function RootLayout() {
         <Stack.Screen
           name='index'
           options={{
-            title: 'Starter Base',
+            title: 'Controle de Estoque',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name='login'
+          options={{
+            title: 'Logar',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name='register'
+          options={{
+            title: 'Registrar',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name='serch'
+          options={{
+            title: 'Pesquisar',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name='productResult'
+          options={{
+            title: 'Resultado da pesquisa',
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Stack.Screen
+          name='productSingle'
+          options={{
+            title: 'Resultado da pesquisa',
             headerRight: () => <ThemeToggle />,
           }}
         />
@@ -68,4 +103,4 @@ function useSetAndroidNavigationBar() {
   }, []);
 }
 
-function noop() {}
+function noop() { }
