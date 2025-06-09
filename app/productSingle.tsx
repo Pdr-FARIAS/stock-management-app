@@ -29,7 +29,7 @@ const singleProductMock = {
     id: 101,
     name: 'Café Gourmet Especial - Grãos 250g',
     description: 'Uma seleção de grãos arábica de alta altitude, com torra média, resultando em uma bebida de corpo aveludado, com notas de chocolate e caramelo.',
-    imageUrl: 'https://images.unsplash.com/photo-1511920183353-3c9c9b0a1d4c?w=500',
+    imageUrl: 'https://i.pinimg.com/736x/ec/31/97/ec3197dcbada25f1f371329cf1c8e1a8.jpg',
     shelfId: 12,
     Shelf: { destination: 'ALIMENTOS SECOS' },
     type: 'PRESERVE',
@@ -53,10 +53,14 @@ export default function ProductSingleScreen() {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4">
                 <View className="bg-card rounded-2xl shadow-lg overflow-hidden">
 
+                    <View className="flex items-center">
                     <Image
                         source={{ uri: product.imageUrl }}
-                        className="w-full h-64"
+                        className="w-72 h-96 element-center"
+                        
                     />
+                    </View>
+
 
                     <View className="p-5 gap-4">
                         <View className="gap-2">
