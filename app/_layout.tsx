@@ -1,106 +1,24 @@
-import '~/global.css';
-
-import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Appearance, Platform, View } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
 import { useColorScheme } from '~/lib/useColorScheme';
-import { PortalHost } from '@rn-primitives/portal';
-import { ThemeToggle } from '~/components/ThemeToggle';
-import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
+import { ThemeProvider, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NAV_THEME } from '~/lib/constants';
 
-const LIGHT_THEME: Theme = {
-  ...DefaultTheme,
-  colors: NAV_THEME.light,
-};
-const DARK_THEME: Theme = {
-  ...DarkTheme,
-  colors: NAV_THEME.dark,
-};
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-const usePlatformSpecificSetup = Platform.select({
-  web: useSetWebBackgroundClassName,
-  android: useSetAndroidNavigationBar,
-  default: noop,
-});
+const LIGHT_THEME = { ...DefaultTheme, colors: NAV_THEME.light };
+const DARK_THEME = { ...DarkTheme, colors: NAV_THEME.dark };
 
 export default function RootLayout() {
-  usePlatformSpecificSetup();
   const { isDarkColorScheme } = useColorScheme();
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack>
-        <Stack.Screen
-          name='index'
-          options={{
-            title: 'Controle de Estoque',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-        <Stack.Screen
-          name='login'
-          options={{
-            title: 'Logar',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-        <Stack.Screen
-          name='register'
-          options={{
-            title: 'Registrar',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-        <Stack.Screen
-          name='serch'
-          options={{
-            title: 'Pesquisar',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-        <Stack.Screen
-          name='productResult'
-          options={{
-            title: 'Resultado da pesquisa',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-        <Stack.Screen
-          name='productSingle'
-          options={{
-            title: 'Resultado da pesquisa',
-            headerRight: () => <ThemeToggle />,
-          }}
-        />
-      </Stack>
-      <PortalHost />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+            <Stack>
+                <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+
+                <Stack.Screen name="products/[id]" />
+            </Stack>
+        </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const useIsomorphicLayoutEffect =
-  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
-
-function useSetWebBackgroundClassName() {
-  useIsomorphicLayoutEffect(() => {
-    // Adds the background color to the html element to prevent white background on overscroll.
-    document.documentElement.classList.add('bg-background');
-  }, []);
-}
-
-function useSetAndroidNavigationBar() {
-  React.useLayoutEffect(() => {
-    setAndroidNavigationBar(Appearance.getColorScheme() ?? 'light');
-  }, []);
-}
-
-function noop() { }

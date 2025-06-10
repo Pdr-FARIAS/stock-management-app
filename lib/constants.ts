@@ -12,7 +12,7 @@ export const NAV_THEME = {
     border: 'hsl(240 3.7% 15.9%)', // border
     card: 'hsl(220 20% 12%)', // card
     notification: 'hsl(0 72% 51%)', // destructive
-    primary: 'hsl(220 20% 10%)', // primary
+    primary: 'rgb(10, 132, 255)', // primary
     text: 'hsl(220 15% 95%)', // foreground
   },
 };
